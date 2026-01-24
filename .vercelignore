@@ -1,0 +1,51 @@
+# Vercel ignore file
+# Files and directories to exclude from Vercel deployment
+
+# Server directory (deployed separately to Railway)
+server/
+
+# Docker files
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Documentation
+*.md
+!README.md
+
+# Development files
+.env
+.env.local
+.env*.local
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Dependencies (will be installed by Vercel)
+node_modules/
+
+# Build artifacts
+dist/
+.next/
+out/
+
+# Test files
+**/__tests__/
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+
+# Scripts
+scripts/

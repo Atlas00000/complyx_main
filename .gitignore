@@ -28,6 +28,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 *.log
+logs/
+server/logs/
+server/docker/logs/
+*.log.*
 
 # OS
 .DS_Store

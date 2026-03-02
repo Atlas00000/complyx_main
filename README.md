@@ -280,7 +280,11 @@ ifrsbot/
 │   └── 📄 package.json
 │
 ├── 📄 README.md                  # This file
-├── 📄 DEPLOYMENT.md              # Deployment guide
+├── 📂 docs/                      # Documentation
+│   ├── DEPLOYMENT.md             # Deployment guide
+│   ├── DEV.md                    # Development guide
+│   ├── roadmap.md                # Project roadmap
+│   └── ...                       # Other docs
 └── 📄 package.json              # Root package.json
 ```
 
@@ -489,9 +493,9 @@ See [DEPLOYMENT.md](./DEPLOYMENT.md) for comprehensive deployment instructions.
 
 ## 📚 Documentation
 
-- **[Deployment Guide](./DEPLOYMENT.md)**: Complete deployment instructions
-- **[Development Guide](./DEV.md)**: Development setup and workflows
-- **[Roadmap](./roadmap.md)**: Project roadmap and milestones
+- **[Deployment Guide](./docs/DEPLOYMENT.md)**: Complete deployment instructions
+- **[Development Guide](./docs/DEV.md)**: Development setup and workflows
+- **[Roadmap](./docs/roadmap.md)**: Project roadmap and milestones
 
 ---
 
@@ -545,7 +549,7 @@ See [DEPLOYMENT.md](./DEPLOYMENT.md) for comprehensive deployment instructions.
 For issues, questions, or contributions:
 
 - **GitHub Issues**: [Create an issue](https://github.com/Atlas00000/complyx_main/issues)
-- **Documentation**: See [DEPLOYMENT.md](./DEPLOYMENT.md) and [DEV.md](./DEV.md)
+- **Documentation**: See [DEPLOYMENT.md](./docs/DEPLOYMENT.md) and [DEV.md](./docs/DEV.md)
 
 ---
 

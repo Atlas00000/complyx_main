@@ -22,6 +22,14 @@ Step-by-step guide for pushing and redeploying the Complyx server on Railway (in
 
 ---
 
+## 2b. Set Root Directory (monorepo)
+
+- In **Railway Dashboard** → your project → **complyx_server** service → **Settings** → **Source** (or **General**).
+- Set **Root Directory** to `server` so Railway builds and runs from the `server/` folder (where `package.json` has the `start` script and `railway.json` defines the start command).
+- Without this, Railpack builds from the repo root and fails with "No start command was found".
+
+---
+
 ## 3. Set the start command (migrations on deploy)
 
 - In **Railway Dashboard** → your project → **complyx_server** service → **Settings** (or **Variables** section).

@@ -202,10 +202,36 @@ NEXT_PUBLIC_API_URL=http://localhost:3001
 
 #### 4. Start Docker Services
 
+PostgreSQL and Redis for local development:
+
 ```bash
 cd server/docker
 docker-compose up -d
 ```
+
+#### 4b. Docker builds (client & server)
+
+To build and run the **client** and **server** as Docker images (e.g. for staging or containerized runs):
+
+**Build images:**
+```bash
+# Server
+cd server && docker build -t complyx-server:latest .
+
+# Client (from repo root)
+cd client && docker build -t complyx-client:latest .
+```
+
+**Run (after starting Docker services above and setting env):**
+```bash
+# Server (set DATABASE_URL, REDIS_URL, JWT_SECRET, etc. as needed)
+docker run -p 3001:3001 --env-file server/.env complyx-server:latest
+
+# Client
+docker run -p 3000:3000 complyx-client:latest
+```
+
+Client uses Next.js standalone output; server image includes Prisma and built `dist/`. Ensure DB migrations are applied (e.g. run `pnpm db:migrate` or `prisma migrate deploy` against your DB) before using the server image.
 
 #### 5. Database Setup
 
@@ -262,6 +288,8 @@ ifrsbot/
 │   ├── 📂 lib/                   # Utilities and helpers
 │   ├── 📂 stores/                # Zustand state management
 │   ├── 📂 hooks/                 # Custom React hooks
+│   ├── 📄 Dockerfile             # Client Docker image (standalone)
+│   ├── 📄 .dockerignore
 │   └── 📄 package.json
 │
 ├── 📂 server/                    # Express Backend Application
@@ -276,7 +304,9 @@ ifrsbot/
 │   │   ├── 📂 middleware/         # Express middleware
 │   │   └── 📂 utils/              # Utility functions
 │   ├── 📂 prisma/                # Database schema and migrations
-│   ├── 📂 docker/                # Docker configuration
+│   ├── 📂 docker/                # Docker services (PostgreSQL, Redis)
+│   ├── 📄 Dockerfile             # Server Docker image
+│   ├── 📄 .dockerignore
 │   └── 📄 package.json
 │
 ├── 📄 README.md                  # This file

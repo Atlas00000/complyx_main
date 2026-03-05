@@ -116,6 +116,18 @@ This document captures recommended optimizations for the Complyx platform, cover
 
 ---
 
+## 12. Client Telemetry (Errors & Logs)
+
+| Aspect | Details |
+|--------|--------|
+| **Overview** | Client errors and optional log entries are sent to the backend for visibility (e.g. from mobile). See `logging.md` for the full plan. |
+| **Endpoints** | `POST /api/telemetry/error` (body: message, stack?, code?, url?, userAgent?, userId?, level?) → 204. `POST /api/telemetry/log` (body: entries: [{ level, message, timestamp?, context? }]) → 204. `GET /api/telemetry/errors?limit=&level=` → { errors }. |
+| **What’s sent** | Errors: from ErrorBoundary and API client non-2xx. Logs: when `NEXT_PUBLIC_ENABLE_REMOTE_LOGGING=true`, client logger buffers and flushes to `/api/telemetry/log` (sampling: 100% error/warn, 10% info in production); context includes isMobile, viewport, connection. Payloads are sanitized (no passwords/tokens). |
+| **Retention** | `ClientError` and `ClientLog` are purged by the retention job. Default 30 days; override with `RETENTION_CLIENT_ERROR_DAYS` and `RETENTION_CLIENT_LOG_DAYS`. |
+| **How to view** | Admin page: `/admin/client-errors` (lists recent errors, filter by level). Filter by mobile: use `userAgent` (ClientError) or `context->>'isMobile'` (ClientLog). Optional alert: when client errors in last 15 min exceed `TELEMETRY_ALERT_THRESHOLD` (default 10), server logs a warning and can POST to `TELEMETRY_ALERT_WEBHOOK_URL` (e.g. Slack). |
+
+---
+
 ## Summary Table
 
 | # | Recommendation | Effort | Impact | Priority |
@@ -131,6 +143,7 @@ This document captures recommended optimizations for the Complyx platform, cover
 | 9 | Logging – mobile view | Low | Medium | P2 |
 | 10 | Scroll smoothness | Low | Medium | P2 |
 | 11 | Loading UX | Medium | Medium | P1 |
+| 12 | Client telemetry (errors & logs) | Medium | Medium | P2 |
 
 ---
 
